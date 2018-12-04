@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  BusanMap02
-//
-//  Created by 김종현 on 30/10/2018.
-//  Copyright © 2018 김종현. All rights reserved.
-//
 
 import UIKit
 
