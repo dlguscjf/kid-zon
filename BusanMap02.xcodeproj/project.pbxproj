@@ -14,6 +14,8 @@
 		0571780321881837006975C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0571780121881837006975C3 /* LaunchScreen.storyboard */; };
 		0571780C2188195E006975C3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0571780B2188195E006975C3 /* MapKit.framework */; };
 		0571780E218821B1006975C3 /* BusanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571780D218821B1006975C3 /* BusanData.swift */; };
+		0C3187C921BF760900D81331 /* TableViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3187C821BF760900D81331 /* TableViewController1.swift */; };
+		0C3187CB21BF845000D81331 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C3187CA21BF845000D81331 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		0571780421881837006975C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0571780B2188195E006975C3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0571780D218821B1006975C3 /* BusanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusanData.swift; sourceTree = "<group>"; };
+		0C3187C821BF760900D81331 /* TableViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController1.swift; sourceTree = "<group>"; };
+		0C3187CA21BF845000D81331 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				0571780121881837006975C3 /* LaunchScreen.storyboard */,
 				0571780421881837006975C3 /* Info.plist */,
 				0571780D218821B1006975C3 /* BusanData.swift */,
+				0C3187C821BF760900D81331 /* TableViewController1.swift */,
+				0C3187CA21BF845000D81331 /* Launch Screen.storyboard */,
 			);
 			path = BusanMap02;
 			sourceTree = "<group>";
@@ -139,6 +145,7 @@
 			files = (
 				0571780321881837006975C3 /* LaunchScreen.storyboard in Resources */,
 				0571780021881837006975C3 /* Assets.xcassets in Resources */,
+				0C3187CB21BF845000D81331 /* Launch Screen.storyboard in Resources */,
 				057177FE21881836006975C3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				057177FB21881836006975C3 /* ViewController.swift in Sources */,
+				0C3187C921BF760900D81331 /* TableViewController1.swift in Sources */,
 				0571780E218821B1006975C3 /* BusanData.swift in Sources */,
 				057177F921881836006975C3 /* AppDelegate.swift in Sources */,
 			);

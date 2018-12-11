@@ -16,7 +16,7 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate,CLL
     var item:[String:String] = [:]  // item[key] => value
     var items:[[String:String]] = []
     var currentElement = ""
-    
+    var selected: BusanData?
     var tPM10: String?
     var address: String?
     var lat: String?
@@ -24,8 +24,7 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate,CLL
     var loc: String?
     var dLat: Double?
     var dLong: Double?
-    var vPM10Cai: String?
-    var mPM10Cai: String?
+   
     
     let addrs:[String:[String]] = [
         "방울어린이집" : ["35.094243", "128.992474"],
@@ -58,6 +57,7 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate,CLL
         vzoom.maximumValue = 11
         
        
+        // 사용자 현재 위치 트랙킹
         locationManager.delegate = self
         
         if CLLocationManager.locationServicesEnabled() {
@@ -67,10 +67,11 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate,CLL
         
         locationManager.startUpdatingLocation()
         
+        // 사용자 현재 위치, 캠파스 표시
         myMapView.showsUserLocation = true
         myMapView.showsCompass = true
         
-        self.title = "부산 어린이집"
+        self.title = "Kid Zone"
         // Do any additional setup after loading the view, typically from a nib.
         // XML Parsing
         let key = "E%2FeSbG29KCzlKt24hzLXa%2FztaQQR9XfK0364bMCEN569c0u2qJV4wUYDsaf4cz6XTYesGAj%2BBm5fW1CFwoD3pA%3D%3D"
@@ -123,6 +124,8 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate,CLL
             let droom = item["room"]
             let dmember = item["member"]
             let dteacher = item["teacher"]
+            let dcar = item["car"]
+            let dhomepage = item["homepage"]
             
 //            print(dSite!)
 //            print(dgubun!)
@@ -135,7 +138,7 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate,CLL
 
 
             
-            annotation = BusanData(coordinate: CLLocationCoordinate2D(latitude: dLat!, longitude: dLong!), title: dSite!, subtitle: dgubun!, addrRoad: daddrRoad!, phone: dphone!, room: droom!, member: dmember!, teacher: dteacher!)
+            annotation = BusanData(coordinate: CLLocationCoordinate2D(latitude: dLat!, longitude: dLong!), title: dSite!, subtitle: dgubun!, addrRoad: daddrRoad!, phone: dphone!, room: droom!, member: dmember!, teacher: dteacher!,car : dcar!, homepage: dhomepage!)
            
             annotations.append(annotation!)
             
@@ -202,22 +205,36 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate,CLL
     
     // rightCalloutAccessoryView를 눌렀을때 호출되는 delegate method
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let viewAnno = view.annotation as! BusanData // 데이터 클래스로 형변환(Down Cast)
-        let vname = viewAnno.title
-        let vgubun = viewAnno.subtitle
-        let vaddr = viewAnno.addrRoad
-        let vphoen = viewAnno.phone
-        let vroom = viewAnno.room
-        let vmember = viewAnno.member
-        let vteacher = viewAnno.teacher
-
-
-
-        let ac = UIAlertController(title: vname!, message: "구분 : \(vgubun!) \n 주소 : \(vaddr!) \n 전화번호 : \(vphoen!) \n 유치원생 수 : \(vmember!) \n 교사 수 : \(vteacher!) \n 방 갯수 : \(vroom!)" , preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-        self.present(ac, animated: true, completion: nil)
+        selected = view.annotation as? BusanData
+        
+        if control == view.rightCalloutAccessoryView {
+            self.performSegue(withIdentifier: "showDetail", sender: self)
+        }
+//        let viewAnno = view.annotation as! BusanData // 데이터 클래스로 형변환(Down Cast)
+//        let vname = viewAnno.title
+//        let vgubun = viewAnno.subtitle
+//        let vaddr = viewAnno.addrRoad
+//        let vphoen = viewAnno.phone
+//        let vroom = viewAnno.room
+//        let vmember = viewAnno.member
+//        let vteacher = viewAnno.teacher
+//
+//
+//
+//        let ac = UIAlertController(title: vname!, message: "구분 : \(vgubun!) \n 주소 : \(vaddr!) \n 전화번호 : \(vphoen!) \n 유치원생 수 : \(vmember!) \n 교사 수 : \(vteacher!) \n 방 갯수 : \(vroom!)" , preferredStyle: .alert)
+//        ac.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+//        self.present(ac, animated: true, completion: nil)
 
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            let detailVC = segue.destination as! TableViewController1
+            
+            detailVC.selectedForDetail = self.selected
+        }
+        
+    }
+    
     func changeStepperLocation(sLat: Double, sLong: Double) {
         
         let currnetLoc: CLLocation = locationManager.location!
